@@ -2,6 +2,8 @@ $(document).ready( function() {
     var arrCrystalImages = ["assets/images/crystal-1.png","assets/images/crystal-2.png","assets/images/crystal-3.png","assets/images/crystal-4.png"];
     var numRandomNumber;
     var numCurrentTotal = 0;
+    var numWins = 0;
+    var numLosses = 0;
 
     // Add crystals to the page
     for (var i = 0; i < arrCrystalImages.length; i++) {
@@ -28,9 +30,13 @@ $(document).ready( function() {
         $("#number-total").text(numCurrentTotal);
         if( numCurrentTotal > numRandomNumber) {
             alert("Too high. You LOSE!");
+            numLosses++;
+            $("#losses").text(numLosses);
         }
         else if (numCurrentTotal === numRandomNumber) {
             alert("By Poseidon's beard, you did it!");
+            numWins++;
+            $("#wins").text(numWins);
         }
     });
 });
