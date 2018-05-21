@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +12,32 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <script src="assets/javascript/game.js"></script>
 </head>
+
 <body>
-    
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4 text-center">Mystery Number Crystals</h1>
+            <h2 class="text-center">This game's random number:
+                <strong>
+                    <span id="random-number"></span>
+                </strong>
+            </h2>
+            <p>Clicking the crystals below will add some number to your running total. Try to get your total to equal this game's
+                random number!</p>
+        </div>
+        <div class="row">
+            <div class="col-8 bg-light" id="crystals-section">
+
+            </div>
+            <div class="col-4 bg-info" id="info-section">
+                <p>Current total: <id="number-total"></id></p>
+                <p>Wins: <id="wins"></id></p>
+                <p>Losses: <id="losses"></id></p>
+            </div>
+        </div>
+    </div>
+
+
 </body>
+
 </html>
