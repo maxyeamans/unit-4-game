@@ -19,6 +19,14 @@ $(document).ready(function () {
 
     InitializeGame();
 
+    // On crystal click, add the crystal's value to running total
+    $(".crystal-image").on("click", function () {
+        console.log($(this).attr("value"));
+        numCurrentTotal += parseInt($(this).attr("value"));
+        $("#number-total").text(numCurrentTotal);
+        CheckForWin();
+    });
+
     function InitializeGame() {
         // Set the game's random number between 19 and 120
         numRandomNumber = Math.floor(Math.random() * 101) + 19;
@@ -28,6 +36,8 @@ $(document).ready(function () {
         // Set the crystals' random numbers between 1 and 12
         $(".crystal-image").each(function (index) {
             $(this).attr("value", Math.floor(Math.random() * 12) + 1);
+            // Should I reuse the numRandomNumber variable above to store the random number
+            // instead of plugging the whole function in as an argument?
             console.log("Crystal " + (index + 1) + " value:", $(this).attr("value"));
         });
 
@@ -35,14 +45,6 @@ $(document).ready(function () {
         numCurrentTotal = 0;
         $("#number-total").text(numCurrentTotal);
     };
-
-    // On crystal click, add the crystal's value to running total
-    $(".crystal-image").on("click", function () {
-        console.log($(this).attr("value"));
-        numCurrentTotal += parseInt($(this).attr("value"));
-        $("#number-total").text(numCurrentTotal);
-        CheckForWin();
-    });
 
     function CheckForWin() {
         if (numCurrentTotal > numRandomNumber) {
