@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    // Global variables
     var arrCrystalImages = ["assets/images/crystal-1.png", "assets/images/crystal-2.png", "assets/images/crystal-3.png", "assets/images/crystal-4.png"];
     var numRandomNumber;
     var numCurrentTotal = 0;
@@ -11,22 +12,16 @@ $(document).ready(function () {
         var imgCrystal = $("<img>");
         imgCrystal.addClass("crystal-image px-2");
         imgCrystal.attr({
+            // Get the crystal source file from the global array variable
             "src": arrCrystalImages[i],
+            // Set the id attribute so we can select the crystal later
             "id": "crystal-" + i
         });
+        // Add the crystal to the page
         $("#crystals-section").append(imgCrystal);
     };
 
-    InitializeGame();
-
-    // On crystal click, add the crystal's value to running total
-    $(".crystal-image").on("click", function () {
-        console.log($(this).attr("value"));
-        numCurrentTotal += parseInt($(this).attr("value"));
-        $("#number-total").text(numCurrentTotal);
-        CheckForWin();
-    });
-
+    // Function to get the game started
     function InitializeGame() {
         // Set the game's random number between 19 and 120
         numRandomNumber = Math.floor(Math.random() * 101) + 19;
@@ -36,9 +31,9 @@ $(document).ready(function () {
         // Set the crystals' random numbers between 1 and 12
         $(".crystal-image").each(function (index) {
             $(this).attr("value", Math.floor(Math.random() * 12) + 1);
-            // Should I reuse the numRandomNumber variable above to store the random number
-            // instead of plugging the whole function in as an argument?
-            console.log("Crystal " + (index + 1) + " value:", $(this).attr("value"));
+            // Not the driest code, but I didn't want to declare a new variable just
+            // to hold the random number.
+            // console.log("Crystal " + (index + 1) + " value:", $(this).attr("value"));
         });
 
         // Set the current total to 0
@@ -46,6 +41,8 @@ $(document).ready(function () {
         $("#number-total").text(numCurrentTotal);
     };
 
+    // Function to check for a win on each crystal click.
+    // The game automatically re-initializes on a win or a loss.
     function CheckForWin() {
         if (numCurrentTotal > numRandomNumber) {
             alert("Too high. You LOSE!");
@@ -60,4 +57,16 @@ $(document).ready(function () {
             InitializeGame();
         }
     }
+
+    // Start the game.
+    InitializeGame();
+
+    // On crystal click, add the crystal's value to running total
+    $(".crystal-image").on("click", function () {
+        // console.log($(this).attr("value"));
+        numCurrentTotal += parseInt($(this).attr("value"));
+        $("#number-total").text(numCurrentTotal);
+        CheckForWin();
+    });
+
 });
